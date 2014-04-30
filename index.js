@@ -2,8 +2,8 @@
 var Point = require("point");
 
 function Isrc ( country, registrant, year, id ) {
-  this.country = country;
-  this.registrant = registrant;
+  this.country = country || "CC";
+  this.registrant = registrant || "XXX";
   this.year = Isrc.parseYear(year);
   this.id = Point.clamp((parseInt(id) || 0), 0, 99999);
 }
