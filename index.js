@@ -5,7 +5,7 @@ function Isrc ( country, registrant, year, id ) {
   this.country = country;
   this.registrant = registrant;
   this.year = Isrc.parseYear(year);
-  this.id = Point.clamp(0, 99999, (parseInt(id) || 0));
+  this.id = Point.clamp((parseInt(id) || 0), 0, 99999);
 }
 
 Isrc.separator = "-";
