@@ -4,7 +4,9 @@
   "description": "A isrc object.",
   "version": "0.0.1",
   "keywords": [],
-  "dependencies": {},
+  "dependencies": {
+    "tm-components/point":"0.0.1"
+  },
   "development": {},
   "license": "MIT",
   "main": "index.js",
