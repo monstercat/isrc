@@ -1,10 +1,11 @@
 {
   "name": "isrc",
   "repo": "tm-components/isrc",
-  "description": "A isrc object.",
+  "description": "A isrc class.",
   "version": "0.0.1",
   "keywords": [],
   "dependencies": {
+    "tm-components/date-time":"0.0.1",
     "tm-components/point":"0.0.1"
   },
   "development": {},

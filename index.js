@@ -1,42 +1,64 @@
 
+var DateTime = require("date-time");
 var Point = require("point");
 
-function Isrc ( country, registrant, year, id ) {
-  this.country = country || "CC";
-  this.registrant = registrant || "XXX";
-  this.year = Isrc.parseYear(year);
-  this.id = Point.clamp((parseInt(id) || 0), 0, 99999);
+function Isrc ( opts ) {
+  this.country = opts.country || "CC";
+  this.registrant = opts.registrant || "XXX";
+  this.year = Point.clamp((parseInt(opts.year) || (new Date()).getFullYear()), 0, 9999);
+  this.id = Point.clamp((parseInt(opts.id) || 0), 0, 99999);
 }
 
 Isrc.separator = "-";
 
-Isrc.prettify = function ( str ) {
-  return (str.substr(0, 2) + Isrc.separator 
-    + str.substr(2, 3) + Isrc.separator
-    + str.substr(5, 2) + Isrc.separator
-    + str.substr(7, 5)
-    ).toUpperCase();
+Isrc.prettify = function ( value ) {
+  var isrc = Isrc.parse(value);
+  return isrc.pretty();
 };
 
-Isrc.parse = function ( str ) {
-  str = str.replace(Isrc.separator, "");
-  return new Isrc(str.substr(0, 2), str.substr(3, 3), str.substr(5, 2), str.substr(7, 5));
+Isrc.parse = function ( value ) {
+  if ( typeof value == "string" ) {
+    str = value.replace(Isrc.separator, "");
+    return new Isrc({
+      country: str.substr(0, 2), 
+      registrant: str.substr(3, 3), 
+      year: str.substr(5, 2),
+      id: str.substr(7, 5)
+    });
+  }
+
+  return new Isrc(value);
 };
 
 Isrc.parseYear = function ( year ) {
-  return parseInt(year.toString().match(/\d{2}$/)[0]);
+  return DateTime.parseShortYear(year);
 };
 
 Isrc.prototype.toString = function () {
   return this.stringify(this.id);
 };
 
+Isrc.prototype.toObject = function () {
+  return {
+    country: this.country,
+    registrant: this.registrant,
+    year: this.year,
+    id: this.id
+  };
+};
+
+Isrc.prototype.clone = function ( id ) {
+  var o = this.toObject();
+  o.id = id || o.id;
+  return new Isrc(o);
+};
+
 Isrc.prototype.next = function () {
-  return new Isrc(this.country, this.registrant, this.year, this.id + 1);
+  return this.clone(this.id + 1);
 };
 
 Isrc.prototype.previous = function () {
-  return new Isrc(this.country, this.registrant, this.year, this.id - 1);
+  return this.clone(this.id - 1);
 };
 
 Isrc.prototype.stringify = function ( id, separator ) {
@@ -47,7 +69,7 @@ Isrc.prototype.stringify = function ( id, separator ) {
   }
   return (this.country + separator
     + this.registrant + separator
-    + this.year + separator 
+    + Isrc.parseYear(this.year) + separator 
     + id).toUpperCase();
 };
 
