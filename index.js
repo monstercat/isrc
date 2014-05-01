@@ -19,7 +19,7 @@ Isrc.prettify = function ( str ) {
 };
 
 Isrc.parse = function ( str ) {
-  str = str.replace("-", "");
+  str = str.replace(Isrc.separator, "");
   return new Isrc(str.substr(0, 2), str.substr(3, 3), str.substr(5, 2), str.substr(7, 5));
 };
 
