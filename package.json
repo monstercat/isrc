@@ -1,0 +1,17 @@
+{
+  "name": "isrc",
+  "description": "ISRC parser/generator",
+  "version": "0.1.0",
+  "repository": {
+    "url": "https://github.com/jb55/isrc"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "tap test.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "tap": "^2.3.0",
+    "tape": "^4.2.2"
+  }
+}
