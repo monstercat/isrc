@@ -7,11 +7,10 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "tap test.js"
+    "test": "node test.js"
   },
   "dependencies": {},
   "devDependencies": {
-    "tap": "^2.3.0",
     "tape": "^4.2.2"
   }
 }
