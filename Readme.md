@@ -1,10 +1,10 @@
 
-# isrc
+# ISRC
 
-  A ISRC class and helper functions.
+  An ISRC class and helper functions.
 
 ## Installation
 
-  Install with [component(1)](http://component.io):
+  Install with `npm`
 
-    $ component install tm-components/isrc
+    $ npm install isrc
