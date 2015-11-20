@@ -3,7 +3,7 @@
   "description": "ISRC parser/generator",
   "version": "0.1.0",
   "repository": {
-    "url": "https://github.com/jb55/isrc"
+    "url": "https://github.com/monstercat/isrc"
   },
   "main": "index.js",
   "scripts": {
